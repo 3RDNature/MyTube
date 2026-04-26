@@ -195,12 +195,13 @@ const CloudDriveSettings: React.FC<CloudDriveSettingsProps> = ({ settings, onCha
 
         try {
             await ensureCsrfToken();
+            const csrfToken = getCsrfToken();
             const response = await fetch(getApiRequestUrl('/cloud/sync'), {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(getCsrfToken() ? { 'X-CSRF-Token': getCsrfToken()! } : {}),
+                    ...(csrfToken ? { 'X-CSRF-Token': csrfToken } : {}),
                 },
             });
 
