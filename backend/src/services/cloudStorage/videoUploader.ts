@@ -2,6 +2,7 @@
  * Video upload operations (handles video, thumbnail, and metadata uploads)
  */
 
+import os from "os";
 import path from "path";
 import { logger } from "../../utils/logger";
 import { updateVideo } from "../storageService";
@@ -96,7 +97,7 @@ export async function uploadVideo(
           .replace(".jpg", ".json")
           .replace(".png", ".json")
       : `${sanitizeFilename(videoData.title)}.json`;
-    const tempMetadataDir = path.join(process.cwd(), "temp_metadata");
+    const tempMetadataDir = path.join(os.tmpdir(), "temp_metadata");
     const metadataPath = resolveSafeChildPath(tempMetadataDir, metadataFileName);
     ensureDirSafeSync(path.dirname(metadataPath), tempMetadataDir);
     writeFileSafeSync(

@@ -112,6 +112,8 @@ type EnsureCsrfTokenOptions = {
   refresh?: boolean;
 };
 
+export const getCsrfToken = (): string | null => csrfToken;
+
 export const ensureCsrfToken = async (
   options: EnsureCsrfTokenOptions = {}
 ): Promise<void> => {
